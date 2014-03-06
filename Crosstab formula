@@ -1,0 +1,32 @@
+Gross:
+	Edit Insert Formula:
+	GridRowColumnValue("@isEarning") = 1 AND
+	GetColumnGroupIndexOf(CurrentColumnIndex) = 3 AND 
+	GridRowColumnValue("RSP_PAYYREGISTER.REMSEGID") = {RSP_PAYYREGISTER.EARNINGMAXID}
+	
+	Edit Header Formula:
+	"Gross"
+	
+	Edit Value Formula:
+	GetTotalValueFor("RSP_PAYYREGISTER.REMSEGID",CurrentSummaryIndex);
+		
+Total Deduction:	
+	Edit Insert Formula:
+	CurrentColumnIndex=(GetNumColumns-3);
+	
+	Edit Header Formula:
+	"Total Deduction"
+	
+	Edit Value Formula:
+	GetTotalValueFor ("RSP_PAYYREGISTER.REMSEGID", CurrentSummaryIndex);
+		
+Net Pay:	
+	Edit Insert Formula:
+	CurrentColumnIndex=(GetNumColumns-3);
+	
+	Edit Header Formula:
+	"Net Pay"
+	
+	Edit Value Formula:
+	GetTotalValueFor("@isEarning",CurrentSummaryIndex) - 
+	(GetTotalValueFor ("RSP_PAYYREGISTER.REMSEGID",CurrentSummaryIndex ) + GetTotalValueFor("RSP_PAYYREGISTER.REMSEGID",CurrentSummaryIndex) );
