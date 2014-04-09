@@ -1,0 +1,20 @@
+1. Opening Stock Formula
+
+whileprintingrecords;
+shared numbervar sub_closing_stock_qty;
+if RecordNumber = 1 then
+    if isnull({INV_RSP_ITEMLEDGER_GET;1.OpeningQuantity}) or {INV_RSP_ITEMLEDGER_GET;1.OpeningQuantity} = 0 then
+        0
+    else {INV_RSP_ITEMLEDGER_GET;1.OpeningQuantity}
+else
+    sub_closing_stock_qty;
+    
+
+2. Closing Stock Formula 
+
+whileprintingrecords;
+shared numbervar sub_closing_stock_qty;
+if RecordNumber = 1 then
+    sub_closing_stock_qty := ({@openingQty}+{@stockinQty}-{@stockoutQty}-{@receiveReturnQty}+{@salesReturnQty}+{@adjustmentQty})
+else
+    sub_closing_stock_qty := (sub_closing_stock_qty + {@stockinQty}-{@stockoutQty}-{@receiveReturnQty}+{@salesReturnQty}+{@adjustmentQty})
